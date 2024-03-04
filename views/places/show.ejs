@@ -10,6 +10,13 @@
     <h4><%= place.location %></h4>
     <p><%= place.price %></p>
     <br />
+    <form
+      action="/places/<%= place._id %>?_method=DELETE"
+      method="POST"
+      style="display: inline !important"
+    >
+      <input type="submit" value="Delete" />
+    </form>
     <a href="/places/<%= place._id %>/edit">Edit</a>
     <br />
     <a href="/places">Back to all places</a>
