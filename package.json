@@ -4,8 +4,8 @@
   "description": "Website for listing place and point of interest",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "seed": "node seeds/place.js"
   },
   "keywords": [],
   "author": "mif - miftachulhd5@gmail.com",

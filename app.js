@@ -23,17 +23,17 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/seed/place", async (req, res) => {
-  const place = new Place({
-    title: "Barata Cafee",
-    price: "200",
-    description: "Beautiful Caffe for hangout",
-    location: "Indonesia",
-  });
+// app.get("/seed/place", async (req, res) => {
+//   const place = new Place({
+//     title: "Barata Cafee",
+//     price: "200",
+//     description: "Beautiful Caffe for hangout",
+//     location: "Indonesia",
+//   });
 
-  await place.save();
-  res.send("Place created: " + place);
-});
+//   await place.save();
+//   res.send("Place created: " + place);
+// });
 
 const port = 3000;
 app.listen(port, () => {
