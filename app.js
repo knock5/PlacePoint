@@ -1,4 +1,5 @@
 const express = require("express");
+const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
@@ -6,8 +7,9 @@ const app = express();
 // models
 const Place = require("./models/Place");
 
-// middkewares
+// middlewares
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 // connect to MongoDB
 mongoose
@@ -35,12 +37,27 @@ app.get("/places/create", (req, res) => {
   res.render("places/create");
 });
 
+// create new place
 app.post("/places", async (req, res) => {
   const place = new Place(req.body.place);
   await place.save();
   res.redirect("/places");
 });
 
+app.get("/places/:id/edit", async (req, res) => {
+  const { id } = req.params;
+  const place = await Place.findById(id);
+  res.render("places/edit", { place });
+});
+
+// edit by id
+app.put("/places/:id", async (req, res) => {
+  const { id } = req.params;
+  await Place.findByIdAndUpdate(id, { ...req.body.place });
+  res.redirect("/places");
+});
+
+// get by id
 app.get("/places/:id", async (req, res) => {
   const { id } = req.params;
   const place = await Place.findById(id);
