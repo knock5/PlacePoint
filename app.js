@@ -6,6 +6,9 @@ const app = express();
 // models
 const Place = require("./models/Place");
 
+// middkewares
+app.use(express.urlencoded({ extended: true }));
+
 // connect to MongoDB
 mongoose
   .connect("mongodb://127.0.0.1/placepoint")
@@ -26,6 +29,16 @@ app.get("/", (req, res) => {
 app.get("/places", async (req, res) => {
   const places = await Place.find();
   res.render("places/index", { places });
+});
+
+app.get("/places/create", (req, res) => {
+  res.render("places/create");
+});
+
+app.post("/places", async (req, res) => {
+  const place = new Place(req.body.place);
+  await place.save();
+  res.redirect("/places");
 });
 
 app.get("/places/:id", async (req, res) => {
