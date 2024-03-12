@@ -13,10 +13,12 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header><%- include('partials/navbar') %></header>
 
     <main class="container"><%- body %></main>
+
+    <%- include('partials/footer') %>
 
     <!-- bootstrap JS -->
     <script
