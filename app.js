@@ -9,7 +9,7 @@ const app = express();
 const Place = require("./models/Place");
 
 // middlewares
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
 // connect to MongoDB
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 
 app.get("/places", async (req, res) => {
   const places = await Place.find();
-  res.render("places/index", { places });
+  res.render("places/index", {places});
 });
 
 app.get("/places/create", (req, res) => {
@@ -48,28 +48,28 @@ app.post("/places", async (req, res) => {
 });
 
 app.get("/places/:id/edit", async (req, res) => {
-  const { id } = req.params;
+  const {id} = req.params;
   const place = await Place.findById(id);
-  res.render("places/edit", { place });
+  res.render("places/edit", {place});
 });
 
 // edit by id
 app.put("/places/:id", async (req, res) => {
-  const { id } = req.params;
-  await Place.findByIdAndUpdate(id, { ...req.body.place });
+  const {id} = req.params;
+  await Place.findByIdAndUpdate(id, {...req.body.place});
   res.redirect("/places");
 });
 
 // get by id
 app.get("/places/:id", async (req, res) => {
-  const { id } = req.params;
+  const {id} = req.params;
   const place = await Place.findById(id);
-  res.render("places/show", { place });
+  res.render("places/show", {place});
 });
 
 // delete by id
 app.delete("/places/:id", async (req, res) => {
-  const { id } = req.params;
+  const {id} = req.params;
   await Place.findByIdAndDelete(id);
   res.redirect("/places");
 });
