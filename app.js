@@ -10,9 +10,22 @@ const app = express();
 // models
 const Place = require("./models/Place");
 
+// schemas
+const { placeSchema } = require("./schemas/place");
+
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+const validatePlace = (req, res, next) => {
+  const { error } = placeSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
 
 // connect to MongoDB
 mongoose
@@ -48,6 +61,7 @@ app.get("/places/create", (req, res) => {
 // create new place
 app.post(
   "/places",
+  validatePlace,
   wrapAsync(async (req, res) => {
     const place = new Place(req.body.place);
     await place.save();
@@ -67,6 +81,7 @@ app.get(
 // edit by id
 app.put(
   "/places/:id",
+  validatePlace,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Place.findByIdAndUpdate(id, { ...req.body.place });
