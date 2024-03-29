@@ -3,7 +3,7 @@
 <h1 class="text-center">Create a New Place</h1>
 
 <div class="col-6 offset-3">
-  <form action="/places" method="POST">
+  <form action="/places" method="POST" class="needs-validation" novalidate>
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input
@@ -13,6 +13,8 @@
         class="form-control"
         required
       />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please input a title.</div>
     </div>
     <div class="mb-3">
       <label for="location" class="form-label">Location</label>
@@ -23,6 +25,8 @@
         class="form-control"
         required
       />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please input location.</div>
     </div>
     <div class="mb-1">
       <label for="price" class="form-label">Price</label>
@@ -35,7 +39,10 @@
         name="place[price]"
         class="form-control"
         aria-label="Amount (to the nearest rupiah)"
+        required
       />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please input price.</div>
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
@@ -44,7 +51,10 @@
         id="description"
         rows="4"
         class="form-control"
+        required
       ></textarea>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please input description.</div>
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Image Url</label>
@@ -55,6 +65,8 @@
         class="form-control"
         required
       />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please input an image url.</div>
     </div>
 
     <div class="mb-3">
@@ -62,3 +74,26 @@
     </div>
   </form>
 </div>
+
+<script>
+  (() => {
+    "use strict";
+
+    const forms = document.querySelectorAll(".needs-validation");
+
+    Array.from(forms).forEach((form) => {
+      form.addEventListener(
+        "submit",
+        (event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>

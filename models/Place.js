@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const placeSchema = new mongoose.Schema({
   title: String,
-  price: String,
+  price: Number,
   description: String,
   location: String,
   image: String,
