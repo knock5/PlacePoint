@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Place = require("../models/Place");
+const Place = require("../models/place");
 
 mongoose
   .connect("mongodb://127.0.0.1/placepoint")

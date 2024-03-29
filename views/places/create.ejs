@@ -1,8 +1,8 @@
 <% layout('layout/app') %>
 
-<h1 class="text-center">Create a New Place</h1>
+<h1 class="text-center py-2">Create a New Place</h1>
 
-<div class="col-6 offset-3">
+<div class="col-6 offset-3 py-2">
   <form action="/places" method="POST" class="needs-validation" novalidate>
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
@@ -74,26 +74,3 @@
     </div>
   </form>
 </div>
-
-<script>
-  (() => {
-    "use strict";
-
-    const forms = document.querySelectorAll(".needs-validation");
-
-    Array.from(forms).forEach((form) => {
-      form.addEventListener(
-        "submit",
-        (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
-  })();
-</script>
